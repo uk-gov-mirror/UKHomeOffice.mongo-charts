@@ -1,0 +1,18 @@
+pipeline:
+  fetch_image_from_quay:
+    image: docker:18.06
+    commands:
+      - docker pull quay.io/mongodb/charts:19.09
+
+  republish_image:
+    image: docker:18.06
+    environment:
+      - DOCKER_USERNAME=ukhomeofficedigital+mongo_charts
+    registry: quay.io
+    repo: quay.io/ukhomeofficedigital/mongo-charts
+    secrets: [ DOCKER_PASSWORD ]
+    tags:
+      - ${DRONE_TAG}
+      - latest
+    when:
+      event: push
