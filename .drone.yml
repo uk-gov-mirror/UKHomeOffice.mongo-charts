@@ -7,8 +7,8 @@ pipeline:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
       - docker login -u="regt-build-bot" -p=$${DOCKER_PASSWORD} docker.digital.homeoffice.gov.uk
-      - docker pull quay.io/mongodb/charts:19.09
-      - docker tag quay.io/mongodb/charts:19.09 docker.digital.homeoffice.gov.uk/evw/mongo-charts:19.09
+      - docker build -t mongo-charts .
+      - docker tag mongo-charts docker.digital.homeoffice.gov.uk/evw/mongo-charts:latest
       - docker push docker.digital.homeoffice.gov.uk/evw/mongo-charts
     when:
       event: push
