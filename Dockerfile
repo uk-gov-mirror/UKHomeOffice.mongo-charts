@@ -16,4 +16,4 @@ USER 1000
 
 EXPOSE 80
 EXPOSE 8080
-CMD /mongodb-charts/bin/charts-cli start
+CMD /mongodb-charts/bin/charts-cli startup
