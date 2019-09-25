@@ -5,6 +5,7 @@ COPY tgz-parts/* /tgz-parts/
 RUN cd /tgz-parts/; cat * > /mongo-charts-modified.tgz
 RUN cd /;tar -xf mongo-charts-modified.tgz
 RUN rm -rf /tgz-parts
+COPY charts-cli.js /mongodb-charts/bin/charts-cli.js
 COPY entrypoint.sh /entrypoint.sh
 
 RUN groupadd -r app -g 1000 && \
