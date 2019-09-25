@@ -1,5 +1,6 @@
 # mongo-charts
 
-This repo exists to clone the mongo-charts image from quay.io/mongodb/charts
-and republish it (unmodified) to our internal docker repo which is whitelisted
-for deployments
+This package lifts mongo-charts (quay.io/mongo/charts)
+and repackages it on the homeoffice nodejs image and
+has some source code patches applied to wire up the ssl
+certificates correctly.
