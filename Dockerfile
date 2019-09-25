@@ -5,6 +5,7 @@ COPY tgz-parts/* /tgz-parts/
 RUN cd /tgz-parts/; cat * > /mongo-charts-modified.tgz
 RUN cd /;tar -xf mongo-charts-modified.tgz
 RUN rm -rf /tgz-parts
+COPY entrypoint.sh /entrypoint.sh
 
 RUN groupadd -r app -g 1000 && \
     useradd -r -g app -u 1000 app -d /app && \
@@ -16,4 +17,4 @@ USER 1000
 
 EXPOSE 80
 EXPOSE 8080
-CMD /mongodb-charts/bin/charts-cli startup
+ENTRYPOINT [ "/entrypoint.sh" ]
