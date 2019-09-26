@@ -1,5 +1,18 @@
 FROM quay.io/ukhomeofficedigital/nodejs-base:v8
 
+# Configure nginx
+RUN yum install -y epel-release
+RUN yum install -y nginx nginx-all-modules
+# unpacks data over /etc and /usr/share/nginx
+RUN rm -rf /etc/nginx
+COPY conf/root.tgz /root.tgz
+RUN cd /;tar -xvf root.tgz
+
+# Configure supervisor.d
+RUN yum install -y supervisor
+COPY conf/supervisord.conf /etc/supervisor/supervisord.conf
+
+# Unpack mongo-charts distribution
 RUN mkdir /tgz-parts
 COPY tgz-parts/* /tgz-parts/
 RUN cd /tgz-parts/; cat * > /mongo-charts-modified.tgz
