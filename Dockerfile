@@ -8,6 +8,10 @@ RUN rm -rf /etc/nginx
 COPY conf/root.tgz /root.tgz
 RUN cd /;tar -xvf root.tgz
 
+RUN rm -rf /usr/share/nginx/html
+COPY conf/html.tgz /html.tgz
+RUN cd /;tar -xvf html.tgz
+
 # original app built for node v10 but this seems to be absolutely fine
 RUN curl https://nodejs.org/dist/v8.12.0/node-v8.12.0-linux-x64.tar.gz | tar xz --strip-components=1
 
@@ -20,6 +24,9 @@ RUN cd /;tar -xf mongo-charts-modified.tgz
 RUN rm -rf /tgz-parts
 COPY charts-cli.js /mongodb-charts/bin/charts-cli.js
 COPY entrypoint.sh /entrypoint.sh
+
+# move to tar file later.
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 RUN groupadd -r app -g 1000 && useradd -r -g app -u 1000 app -d /app && mkdir -p /app
 RUN mkdir -p /mongodb-charts/volumes/keys/
