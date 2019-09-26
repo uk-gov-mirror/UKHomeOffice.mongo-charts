@@ -30,7 +30,7 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 RUN groupadd -r app -g 1000 && useradd -r -g app -u 1000 app -d /app && mkdir -p /app
 RUN mkdir -p /mongodb-charts/volumes/keys/
-RUN mkdir -p /run/secrets/charts-mongodb-uri
+RUN mkdir -p /run/secrets/
 RUN mkdir -p /var/log/nginx
 
 RUN chown -R app:app /mongodb-charts/volumes/keys/
